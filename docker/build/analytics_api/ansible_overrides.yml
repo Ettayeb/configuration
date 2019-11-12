@@ -21,3 +21,5 @@ ANALYTICS_API_DATABASES:
     PASSWORD: 'password'
     HOST: "db.{{ DOCKER_TLD  }}"
     PORT: '3306'
+analytics_api_environment:
+  ANALYTICS_API_CFG: "/edx/app/analytics_api/analytics_api/analyticsdataserver/settings/analytics_api.yml"

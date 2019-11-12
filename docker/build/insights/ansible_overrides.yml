@@ -18,3 +18,5 @@ INSIGHTS_DATABASES:
     PASSWORD: 'secret'
     HOST: "db.{{ DOCKER_TLD  }}"
     PORT: '3306'
+insights_environment:
+  ANALYTICS_DASHBOARD_CFG: "/edx/app/insights/edx_analytics_dashboard/analytics_dashboard/settings/insights.yml"

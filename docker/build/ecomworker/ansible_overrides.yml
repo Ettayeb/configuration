@@ -1,3 +1,5 @@
 ---
 
 DOCKER_TLD: "edx"
+ecommerce_worker_environment:
+  ECOMMERCE_WORKER_CFG: '/edx/app/ecomworker/ecomworker/ecommerce_worker/configuration/ecomworker.yml'

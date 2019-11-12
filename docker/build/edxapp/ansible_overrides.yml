@@ -32,6 +32,10 @@ edxapp_debian_pkgs_extra:
   - mongodb-clients
   - mysql-client
 
+edxapp_environment_default:
+  LMS_CFG: "/edx/app/edxapp/edx-platform/lms/envs/lms.yml"
+  STUDIO_CFG: "/edx/app/edxapp/edx-platform/cms/envs/studio.yml"
+
 edxapp_environment_extra:
   SELENIUM_BROWSER: 'firefox'
   SELENIUM_HOST: 'edx.devstack.firefox'
