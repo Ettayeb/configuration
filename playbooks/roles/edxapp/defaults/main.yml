@@ -17,6 +17,7 @@ EDXAPP_PYTHON_VERSION: "python3.5"
 
 EDXAPP_LMS_BASE: "{{ EDXAPP_LMS_SITE_NAME }}:{{ EDXAPP_LMS_NGINX_PORT }}"
 EDXAPP_PREVIEW_LMS_BASE: "preview.{{ EDXAPP_LMS_SITE_NAME }}:{{ EDXAPP_LMS_NGINX_PORT }}"
+EDXAPP_CMS_BASE: "{{ EDXAPP_CMS_SITE_NAME }}:{{ EDXAPP_CMS_NGINX_PORT }}"
 
 EDXAPP_LMS_GUNICORN_EXTRA: ""
 EDXAPP_LMS_GUNICORN_EXTRA_CONF: ""
@@ -40,7 +41,7 @@ EDXAPP_MONGO_USER: 'edxapp'
 EDXAPP_MONGO_DB_NAME: 'edxapp'
 EDXAPP_MONGO_USE_SSL: False
 EDXAPP_MONGO_REPLICA_SET: ''
-EDXAPP_MONGO_AUTH_DB: !!null
+EDXAPP_MONGO_AUTH_DB: ''
 # Used only if EDXAPP_MONGO_REPLICA_SET is provided.
 EDXAPP_MONGO_CMS_READ_PREFERENCE: 'PRIMARY'
 EDXAPP_MONGO_LMS_READ_PREFERENCE: 'SECONDARY_PREFERRED'
@@ -260,7 +261,7 @@ EDXAPP_PRIVATE_REQUIREMENTS:
       extra_args: -e
     # Peer instruction XBlock
     # Need it from github until we can land https://github.com/ubc/ubcpi/pull/167 upstream.
-    - name: git+https://github.com/edx/ubcpi.git@3c4b2cdc9f595ab8cdb436f559b56f36638313b6#egg=ubcpi-xblock
+    - name: git+https://github.com/edx/ubcpi.git@0964302acb29a7bbdd145a1bcb6c8a45b0080343#egg=ubcpi-xblock
       extra_args: -e
     # Vector Drawing and ActiveTable XBlocks (Davidson)
     - name: git+https://github.com/open-craft/xblock-vectordraw.git@76976425356dfc7f13570f354c0c438db84c2840#egg=xblock-vectordraw==0.3.0
@@ -282,7 +283,7 @@ EDXAPP_PRIVATE_REQUIREMENTS:
     - name: git+https://github.com/open-craft/labxchange-xblocks.git@29c6d829b8d54f5683a41626616024c8643b7b0f#egg=labxchange-xblocks
       extra_args: -e
     # "Pathways" learning context plugin for the LabXchange project
-    - name: git+https://github.com/open-craft/lx-pathway-plugin.git@b69f6b27108fa033c9a402f65cbf3a34a7b5ad93#egg=lx-pathway-plugin
+    - name: git+https://github.com/open-craft/lx-pathway-plugin.git@ba1fc294738a7662fc901616fb68e6b91f46e80a#egg=lx-pathway-plugin
       extra_args: -e
 
 # Whether to run reindex_course on deploy
@@ -509,7 +510,7 @@ edxapp_generic_doc_store_config: &edxapp_generic_default_docstore
   socketTimeoutMS: 3000 # default is never timeout while the connection is open, this means it needs to explicitly close raising pymongo.errors.NetworkTimeout
   connectTimeoutMS: 2000 # default is 20000, I believe raises pymongo.errors.ConnectionFailure
   # Not setting waitQueueTimeoutMS and waitQueueMultiple since pymongo defaults to nobody being allowed to wait
-  auth_source: "{{ EDXAPP_MONGO_AUTH_DB }}"
+  authsource: "{{ EDXAPP_MONGO_AUTH_DB }}"
 
 EDXAPP_LMS_DRAFT_DOC_STORE_CONFIG:
   <<: *edxapp_generic_default_docstore
@@ -618,8 +619,6 @@ edxapp_requirements_with_github_urls:
   - "{{ custom_requirements_file }}"
   - "{{ base_requirements_file }}"
   - "{{ sandbox_base_requirements }}"
-
-edxapp_chrislea_ppa: "ppa:chris-lea/node.js"
 
 edxapp_debian_pkgs_default:
   # for compiling the virtualenv

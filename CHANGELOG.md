@@ -1,4 +1,10 @@
 - Role: edxapp
+  - Added `ENTERPRISE_LEARNER_PORTAL_HOSTNAME` env var for lms.
+
+- Role: ecommerce
+  - Added `ENTERPRISE_LEARNER_PORTAL_HOSTNAME` env var for ecommerce.
+
+- Role: edxapp
   - Added Stanford-developed Free Text Response XBlock.
 
 - Role: edxapp
@@ -889,3 +895,5 @@
   - Added `WHITELABEL_DNS` for DNS settings of themes.
   - Added `WHITELABEL_ORG` for whitelabel organization settings.
 
+- Role: all
+  - Removed the unused task timing callback plugin.
